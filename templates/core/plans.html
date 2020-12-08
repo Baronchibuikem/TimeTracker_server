@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Privacy policy | {% endblock title %}
+
+{% block content %}
+    <section class="">
+        {% include 'core/jumbotron.html' with title="Plans" subtitle="Find the most suitable plan for you or your team" %}
+    </section>
+    <div class="container mx-auto">
+    `{% include 'core/individual_plans.html' %}
+    </div>
+{% endblock content%}
