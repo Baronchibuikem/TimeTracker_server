@@ -1,23 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
-from accounts.models import Userprofile
+from accounts.models import Userprofile, CustomUser
+from accounts.forms import SignUpForm
 
 
-def signup(request):
+def signup(request):  # TODO: Write test for this functionality
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        
-        if form.is_valid:
-            user = form.save()
-            user.email = user.username
-            user.save()
-            
-            userprofile = Userprofile.objects.create(user=user)
-            login(request, user)
+        form = SignUpForm(data=request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            new_user.save()
+            userprofile = Userprofile.objects.create(user=new_user)
+            login(request, new_user)
             return redirect('frontpage')
-        
+
     else:
-        form = UserCreationForm()
-    return render(request, 'userprofile/signup.html', {"form": form})
+        form = SignUpForm()
+    return render(request, 'accounts/signup.html', {"form": form})
