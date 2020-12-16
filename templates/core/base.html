@@ -30,6 +30,12 @@
         <div class="bg-dark text-light">
         {% include 'core/footer.html'%}
         </div>
-        <script src="" async defer></script>
+
+        <!-- Scripts -->
+        <script src="https://unpkg.com/vue@next"></script>
+        {% block script %}
+        {% endblock script%}
+        <!-- End scripts -->
+
     </body>
 </html>
