@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% block title %} Log in | {% endblock title %}
+{% block title %} My account | {% endblock title %}
 
 {% block content %}
 <div class="container my-5 pt-5" id="myaccount">
@@ -13,7 +13,7 @@
             <p>{% firstof user.get_full_name user.username %}</p>
             <p>{{ user.email }}</p>
             <div class="d-flex">
-                <a href="" class="btn btn-success mr-3"> Edit profile</a>
+                <a href="{% url 'accounts:edit-profile' %}" class="btn btn-success mr-3"> Edit profile</a>
                 <a href="{% url 'accounts:logout' %}" class="btn btn-danger"> Log out</a>
             </div>
         </div> 

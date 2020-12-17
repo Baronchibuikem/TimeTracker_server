@@ -1,0 +1,72 @@
+{% extends 'core/base.html' %}
+{% block title %} Edit profile | {% endblock title %}
+
+{% block content %}
+<div class="container my-5 pt-5" id="myaccount">
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="#">Dashboard</a>
+        <a class="breadcrumb-item" href="{% url 'myaccount' %}">My Account</a>
+        <a class="breadcrumb-item" href="{% url 'accounts:edit-profile' %}">Edit profile</a>
+        <span class="breadcrumb-item active"></span>
+    </nav>
+    
+
+    <div class="mx-auto col-md-6 card shadow p-3 mb-5  mt-5 bg-white rounded">
+        <form method="post" action="."  enctype="multipart/form-data">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <div>
+                <label>First name</label>
+                <input type="text" id="firstname" class="form-control" name="firstname" {% if request.user.first_name %}
+                 value="{{request.user.first_name }}" {% endif %}/>
+            </div>
+
+            <div>
+                <label>Last name</label>
+                <input type="text" id="lastname" class="form-control" name="lastname" {% if request.user.last_name %}
+                 value="{{request.user.last_name }}" {% endif %}/>
+            </div>
+
+            <div>
+                <label>E-mail</label>
+                <input type="email" id="id_email" class="form-control" name="email" {% if request.user.email %}
+                value="{{request.user.email }}" {% endif %}/>
+            </div>
+
+            <div>
+                <label>Password</label>
+                <input type="password" id="id_password" 
+                    class="form-control" name="password"/>
+            </div>
+
+            {% csrf_token %}
+            <div class="mt-3 mb-5">
+                <button class="btn form-control bg-success" type="submit">Update</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock content%}
+{% block script %}
+<script>
+    const myaccount = {
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                
+            }
+        },
+        methods:{
+           
+        }
+    }
+    Vue.createApp(myaccount).mount("#myaccount")
+</script>
+{% endblock script %}
