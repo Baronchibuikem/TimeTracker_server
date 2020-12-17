@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+{% block title %} Log in | {% endblock title %}
+
+{% block content %}
+<div class="container my-5 pt-5" id="myaccount">
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="#">Dashboard</a>
+        <a class="breadcrumb-item" href="{% url 'myaccount' %}">My Account</a>
+        <span class="breadcrumb-item active"></span>
+    </nav>
+    <div class="row">      
+        <div class="col-md-6">
+            <p>{% firstof user.get_full_name user.username %}</p>
+            <p>{{ user.email }}</p>
+            <div class="d-flex">
+                <a href="" class="btn btn-success mr-3"> Edit profile</a>
+                <a href="{% url 'accounts:logout' %}" class="btn btn-danger"> Log out</a>
+            </div>
+        </div> 
+         <div class="col-md-6">
+
+        </div>
+    </div>
+
+
+</div>
+{% endblock content%}
+{% block script %}
+<script>
+    const myaccount = {
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                
+            }
+        },
+        methods:{
+           
+        }
+    }
+    Vue.createApp(myaccount).mount("#myaccount")
+</script>
+{% endblock script %}
